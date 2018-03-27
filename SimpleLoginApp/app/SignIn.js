@@ -7,12 +7,18 @@ import {
   TouchableOpacity,
   Dimensions
 } from 'react-native';
+import Toast, {DURATION} from 'react-native-easy-toast';
 
 import Meteor, { Accounts } from 'react-native-meteor';
 
 const { width } = Dimensions.get('window');
 
+const navigationOptions = {
+  header: null,
+};
 class SignIn extends Component {
+  static navigationOptions = navigationOptions;
+  
   constructor(props) {
     super(props);
 
@@ -30,8 +36,8 @@ class SignIn extends Component {
       if (error) {
         this.setState({ error: "Invalid input." });
       } else {
-        this.setState({ error: "Logged in successfully." });
-        // ToastAndroid.show("Welcome.", ToastAndroid.SHORT);
+        //this.setState({ error: "Logged in successfully." });
+        this.refs.toast.show("Welcome.", 500);
         this.props.navigation.navigate('SignOut');
       }
     });
@@ -44,7 +50,8 @@ class SignIn extends Component {
       if (error) {
         this.setState({ error: "Invalid input" });
       } else {
-        this.setState({ error: "Account created successfully." });
+        //this.setState({ error: "Account created successfully." });
+        this.refs.toast.show("Account create successfully.", 500);
       }
     });
   }
@@ -77,6 +84,8 @@ class SignIn extends Component {
         <TouchableOpacity style={styles.button} onPress={this.onCreateAccount.bind(this)}>
           <Text style={styles.buttonText}>Create Account</Text>
         </TouchableOpacity>
+
+        <Toast ref="toast" />
       </View>
     );
   }
