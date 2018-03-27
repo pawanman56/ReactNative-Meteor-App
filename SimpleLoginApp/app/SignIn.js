@@ -31,7 +31,8 @@ class SignIn extends Component {
         this.setState({ error: "Invalid input." });
       } else {
         this.setState({ error: "Logged in successfully." });
-        ToastAndroid.show("Welcome.", ToastAndroid.SHORT);
+        // ToastAndroid.show("Welcome.", ToastAndroid.SHORT);
+        this.props.navigation.navigate('SignOut');
       }
     });
   }

@@ -4,12 +4,17 @@ import {
   Text,
   View,
 } from 'react-native';
+import { StackNavigator } from "react-navigation";
 
 import SignIn from './SignIn';
 import SignOut from './SignOut';
 
 import Meteor, { connectMeteor } from 'react-native-meteor';
 
+const Routes = StackNavigator({
+  SignIn: {screen: SignIn},
+  SignOut: {screen: SignOut}
+});
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -30,18 +35,8 @@ export default class App extends Component {
   }
 
   render() {
-    if (this.data.user) {
-      return (
-        <View style={styles.container}>
-          <SignOut />
-        </View>
-      );
-    }
-
     return (
-      <View style={styles.container}>
-        <SignIn />
-      </View>
+      <Routes />
     );
   }
 }
